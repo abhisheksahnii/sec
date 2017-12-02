@@ -1,0 +1,27 @@
+#######################################
+#HTTP FORWARD PROXY SETTING HTTPD.CONF#
+#######################################
+
+
+<VirtualHost 172.30.1.61:443>
+    ServerName www.iiserb.ac.in
+
+    <Proxy *>
+        Order deny,allow
+        Allow from all
+    </Proxy>
+        SSLProxyEngine on
+        SSLProxyVerify none
+        SSLProxyCheckPeerCN off
+        SSLProxyCheckPeerName off
+    SSLEngine on
+    SSLProxyEngine On
+    SSLCertificateFile /etc/ssl/certs/comodo/STAR_iiserb_ac_in.crt
+    SSLCertificateKeyFile /etc/ssl/certs/comodo/server.key
+
+    ProxyRequests Off
+    ProxyPreserveHost On
+    ProxyPass / https://www.iiserb.ac.in:443/
+    ProxyPassReverse / https://www.iiserb.ac.in:443/
+</VirtualHost>
+
